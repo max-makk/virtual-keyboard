@@ -19,7 +19,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Virtual Keyboard',
-    })
+    }),
   ],
   module: {
     rules: [
