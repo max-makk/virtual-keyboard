@@ -1,0 +1,80 @@
+import Key from './Key';
+import buttonsList from './list';
+
+export default class Keyboard {
+  constructor(language = 'eng') {
+    this.language = language;
+    this.keys = [];
+    this.layoutsKeys = { alt: false, ctrl: false };
+    this.textarea = document.querySelector('.textarea');
+  }
+
+  generateButtons() {
+    this.keyboard = document.createElement('div');
+    this.keyboard.classList.add('keyboard');
+    for (let i = 0; i < buttonsList.length; i += 1) {
+      const current = buttonsList[i];
+      const key = new Key(this.language, current.codeName, current.eng, current.rus);
+      this.keyboard.append(key.createButton());
+      this.keys.push(key);
+    }
+    return this.keyboard;
+  }
+
+  pressKey(key) {
+    const k = key.codeName;
+    if (k === 'ShiftLeft' || k === 'ShiftRight') {
+      this.addShift();
+    } else if (k === 'CapsLock') {
+      this.addCaps();
+    } else if (k === 'ControlLeft' || k === 'ControlRight') {
+      this.layoutsKeys.ctrl = true;
+      if (this.layoutsKeys.ctrl && this.layoutsKeys.alt) {
+        this.toggleLanguage();
+      }
+    } else if (k === 'AltLeft' || k === 'AltRight') {
+      this.layoutsKeys.alt = true;
+      if (this.layoutsKeys.ctrl && this.layoutsKeys.alt) {
+        this.toggleLanguage();
+      }
+    } else {
+      this.textarea.value += key.current;
+    }
+  }
+
+  cancelLayout(k) {
+    if (k === 'ControlLeft' || k === 'ControlRight') {
+      this.layoutsKeys.ctrl = false;
+    } else if (k === 'AltLeft' || k === 'AltRight') {
+      this.layoutsKeys.alt = false;
+    }
+  }
+
+  toggleLanguage() {
+    if (this.language === 'rus') {
+      this.language = 'eng';
+    } else {
+      this.language = 'rus';
+    }
+    this.keys.forEach((el) => el.changeLanguage(this.language));
+  }
+
+  addCaps() {
+    this.keys.forEach((el) => el.toggleCaps());
+    document.querySelector('.CapsLock').classList.toggle('caps-is-on');
+  }
+
+  addShift() {
+    this.keys.forEach((el) => el.toggleShift());
+  }
+
+  disableShift(k) {
+    if (k === 'ShiftLeft' || k === 'ShiftRight') {
+      this.removeShift();
+    }
+  }
+
+  removeShift() {
+    this.keys.forEach((el) => el.toggleShift());
+  }
+}

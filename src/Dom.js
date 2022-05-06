@@ -1,0 +1,33 @@
+export default class Dom {
+  constructor() {
+    this.content = document.createElement('div');
+  }
+
+  createPage() {
+    this.content.classList.add('content');
+    const h1 = document.createElement('h1');
+    h1.textContent = 'ПЕШИ ИСЧО!';
+    h1.classList.add('title');
+    this.content.append(h1);
+    const textarea = document.createElement('textarea');
+    textarea.value = 'test';
+    textarea.classList.add('textarea');
+    this.content.append(textarea);
+
+    const description = document.createElement('p');
+    description.textContent = 'Клавиатура создана в операционной системе Ubuntu(Linux)';
+    description.classList.add('descr');
+    this.content.append(description);
+
+    const info = document.createElement('p');
+    info.textContent = 'Для переключения языка комбинация: левыe ctrl + alt';
+    info.classList.add('info');
+    this.content.append(info);
+    document.body.append(this.content);
+  }
+
+  addKeyboard(k) {
+    this.textarea = document.querySelector('.textarea');
+    this.textarea.insertAdjacentElement('afterend', k);
+  }
+}

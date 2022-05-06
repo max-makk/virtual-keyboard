@@ -85,7 +85,9 @@ button:hover {
   animation: upDown 0.1s;
 }
 
-button:active {
+button:active,
+.pressed {
+  background-color: #19181a;
   transform: translate(2px, 2px);
   box-shadow: 0 0 var(--dark), 0 0 black, 1px 1px 1px 1px gray;
 }
@@ -149,4 +151,8 @@ button:active {
 .ControlLeft,
 .ControlRight {
   font-size: 0.8rem;
+}
+
+.caps-is-on {
+  background-color: green;
 }
