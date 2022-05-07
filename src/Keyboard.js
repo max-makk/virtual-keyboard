@@ -45,10 +45,12 @@ export default class Keyboard {
     } else if (k === 'Backspace') {
       this.start = this.textarea.selectionStart;
       this.end = this.textarea.selectionEnd;
-      if (this.start - 1 <= 0) {
-        this.start = 0;
-      } else {
-        this.start -= 1;
+      if (this.textarea.selectionStart === this.textarea.selectionEnd) {
+        if (this.start - 1 <= 0) {
+          this.start = 0;
+        } else {
+          this.start -= 1;
+        }
       }
       this.textarea.setRangeText('', this.start, this.end);
       this.textarea.selectionStart = this.start;
@@ -56,11 +58,16 @@ export default class Keyboard {
     } else if (k === 'Delete') {
       this.start = this.textarea.selectionStart;
       this.end = this.textarea.selectionEnd;
-      this.end += 1;
+      if (this.textarea.selectionStart === this.textarea.selectionEnd) {
+        this.end += 1;
+      }
       this.textarea.setRangeText('', this.start, this.end);
       this.textarea.selectionStart = this.start;
       this.textarea.selectionEnd = this.textarea.selectionStart;
     } else {
+      if (k === 'MetaLeft') {
+        return;
+      }
       this.sendToTextArea(key.current);
     }
   }

@@ -1,6 +1,7 @@
 :root {
   box-sizing: border-box;
   --white: #fafafa;
+  --light: #e9e9e9;
   --dark: #2e2c2f;
 }
 
@@ -68,8 +69,8 @@ body {
 }
 
 .button:hover {
-  color: #2e2c2f;
-  background-color: #e9e9e9;
+  color: var(--light);
+  background-color: #19181a;
 }
 
 button {
@@ -154,5 +155,6 @@ button:active,
 }
 
 .caps-is-on {
-  background-color: green;
+  color: var(--dark);
+  background-color: var(--light);
 }
