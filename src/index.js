@@ -36,8 +36,13 @@ buttons.childNodes.forEach((b) => {
     if (!item) {
       return;
     }
-    keyboard.disableShift(item.codeName);
-    keyboard.cancelLayout(item.codeName);
+    if (codeClass === 'ControlLeft' || codeClass === 'ControlRight'
+    || codeClass === 'AltLeft' || codeClass === 'AltRight') {
+      keyboard.cancelLayout(item.codeName);
+    }
+    if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
+      keyboard.disableShift(item.codeName);
+    }
     item.removePressed();
   });
 });
@@ -58,7 +63,12 @@ window.addEventListener('keyup', (e) => {
   if (!item) {
     return;
   }
-  keyboard.disableShift(e.code);
-  keyboard.cancelLayout(e.code);
+  if (e.code === 'ControlLeft' || e.code === 'ControlRight'
+    || e.code === 'AltLeft' || e.code === 'AltRight') {
+    keyboard.cancelLayout(e.code);
+  }
+  if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
+    keyboard.disableShift(e.code);
+  }
   item.removePressed();
 });

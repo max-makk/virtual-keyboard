@@ -115,5 +115,6 @@ export default class Keyboard {
     this.textarea.setRangeText(c);
     this.textarea.selectionStart = this.start + c.length;
     this.textarea.selectionEnd = this.textarea.selectionStart;
+    this.textarea.scrollTop = this.textarea.scrollHeight;
   }
 }
