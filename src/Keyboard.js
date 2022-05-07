@@ -37,8 +37,30 @@ export default class Keyboard {
       if (this.layoutsKeys.ctrl && this.layoutsKeys.alt) {
         this.toggleLanguage();
       }
+    } else if (k === 'Enter') {
+      this.sendToTextArea('\n');
+    } else if (k === 'Tab') {
+      this.sendToTextArea('\t');
+    } else if (k === 'Backspace') {
+      this.start = this.textarea.selectionStart;
+      this.end = this.textarea.selectionEnd;
+      if (this.start - 1 <= 0) {
+        this.start = 0;
+      } else {
+        this.start -= 1;
+      }
+      this.textarea.setRangeText('', this.start, this.end);
+      this.textarea.selectionStart = this.start;
+      this.textarea.selectionEnd = this.textarea.selectionStart;
+    } else if (k === 'Delete') {
+      this.start = this.textarea.selectionStart;
+      this.end = this.textarea.selectionEnd;
+      this.end += 1;
+      this.textarea.setRangeText('', this.start, this.end);
+      this.textarea.selectionStart = this.start;
+      this.textarea.selectionEnd = this.textarea.selectionStart;
     } else {
-      this.textarea.value += key.current;
+      this.sendToTextArea(key.current);
     }
   }
 
@@ -76,5 +98,13 @@ export default class Keyboard {
 
   removeShift() {
     this.keys.forEach((el) => el.toggleShift());
+  }
+
+  sendToTextArea(c) {
+    this.start = this.textarea.selectionStart;
+    this.end = this.textarea.selectionEnd;
+    this.textarea.setRangeText(c);
+    this.textarea.selectionStart = this.start + c.length;
+    this.textarea.selectionEnd = this.textarea.selectionStart;
   }
 }

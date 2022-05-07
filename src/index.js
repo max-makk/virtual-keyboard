@@ -17,7 +17,7 @@ buttons.childNodes.forEach((b) => {
     if (!item) {
       return;
     }
-    keyboard.pressKey(item.codeName);
+    keyboard.pressKey(item);
     item.addPressed();
   });
   b.addEventListener('mouseup', (e) => {
@@ -28,6 +28,7 @@ buttons.childNodes.forEach((b) => {
       return;
     }
     keyboard.disableShift(item.codeName);
+    keyboard.cancelLayout(item.codeName);
     item.removePressed();
   });
 });
