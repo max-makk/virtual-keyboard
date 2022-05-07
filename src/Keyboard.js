@@ -1,5 +1,6 @@
 import Key from './Key';
 import buttonsList from './list';
+import Storage from './Storage';
 
 export default class Keyboard {
   constructor(language = 'eng') {
@@ -79,6 +80,7 @@ export default class Keyboard {
       this.language = 'rus';
     }
     this.keys.forEach((el) => el.changeLanguage(this.language));
+    Storage.setLanguage(this.language);
   }
 
   addCaps() {

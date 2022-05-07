@@ -1,13 +1,10 @@
 export default class Storage {
-  static saveKeyboardLanguage(language) {
+  static setLanguage(language) {
     localStorage.setItem('keyboard-language', language);
   }
 
-  static getKeyboardLanguage() {
-    let keyboardLanguage = localStorage.getItem('keyboard-language');
-    if (keyboardLanguage) {
-      keyboardLanguage = JSON.parse(keyboardLanguage);
-    }
-    return keyboardLanguage;
+  static getLanguage() {
+    const result = localStorage.getItem('keyboard-language');
+    return result;
   }
 }

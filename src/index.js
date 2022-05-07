@@ -1,11 +1,20 @@
 import './style.css';
 import Keyboard from './Keyboard';
 import Dom from './Dom';
+import Storage from './Storage';
+
+let defaultLanguage = 'eng';
 
 const page = new Dom();
 page.createPage();
 
-const keyboard = new Keyboard('rus');
+if (!Storage.getLanguage()) {
+  Storage.setLanguage(defaultLanguage);
+} else {
+  defaultLanguage = Storage.getLanguage();
+}
+
+const keyboard = new Keyboard(defaultLanguage);
 const buttons = keyboard.generateButtons();
 page.addKeyboard(buttons);
 
