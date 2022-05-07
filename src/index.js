@@ -40,9 +40,7 @@ buttons.childNodes.forEach((b) => {
     || codeClass === 'AltLeft' || codeClass === 'AltRight') {
       keyboard.cancelLayout(item.codeName);
     }
-    if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
-      keyboard.disableShift(item.codeName);
-    }
+    keyboard.disableShift(item.codeName);
     item.removePressed();
   });
 });
