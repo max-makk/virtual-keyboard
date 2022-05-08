@@ -5,6 +5,7 @@ import Storage from './Storage';
 export default class Keyboard {
   constructor(language = 'eng') {
     this.shiftIsPressed = false;
+    this.capsIsOn = false;
     this.language = language;
     this.keys = [];
     this.layoutsKeys = { alt: false, ctrl: false };

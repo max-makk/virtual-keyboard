@@ -43,6 +43,20 @@ buttons.childNodes.forEach((b) => {
     keyboard.disableShift(item.codeName);
     item.removePressed();
   });
+  b.addEventListener('mouseleave', (e) => {
+    e.preventDefault();
+    const codeClass = e.target.classList[1];
+    const item = keyboard.keys.find((el) => el.codeName === codeClass);
+    if (!item) {
+      return;
+    }
+    if (codeClass === 'ControlLeft' || codeClass === 'ControlRight'
+    || codeClass === 'AltLeft' || codeClass === 'AltRight') {
+      keyboard.cancelLayout(item.codeName);
+    }
+    keyboard.disableShift(item.codeName);
+    item.removePressed();
+  });
 });
 
 window.addEventListener('keydown', (e) => {
@@ -51,7 +65,13 @@ window.addEventListener('keydown', (e) => {
   if (!item) {
     return;
   }
-  keyboard.pressKey(item);
+  if ((e.code === 'ShiftLeft' || e.code === 'ShiftRight') && !e.repeat) {
+    keyboard.pressKey(item);
+  } else if (e.code === 'CapsLock' && !e.repeat) {
+    keyboard.pressKey(item);
+  } else {
+    keyboard.pressKey(item);
+  }
   item.addPressed();
 });
 
