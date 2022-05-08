@@ -5,7 +5,7 @@ import Storage from './Storage';
 export default class Keyboard {
   constructor(language = 'eng') {
     this.shiftIsPressed = false;
-    this.capsIsOn = false;
+    this.capsIsPressed = false;
     this.language = language;
     this.keys = [];
     this.layoutsKeys = { alt: false, ctrl: false };
@@ -93,9 +93,17 @@ export default class Keyboard {
   }
 
   addCaps() {
+    if (this.capsIsPressed) {
+      return;
+    }
+    this.capsIsPressed = true;
     this.caps = document.querySelector('.CapsLock');
     this.caps.classList.toggle('caps-is-on');
     this.keys.forEach((el) => el.toggleCaps());
+  }
+
+  removeCaps() {
+    this.capsIsPressed = false;
   }
 
   addShift() {
