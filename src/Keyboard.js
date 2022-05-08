@@ -93,8 +93,9 @@ export default class Keyboard {
   }
 
   addCaps() {
+    this.caps = document.querySelector('.CapsLock');
+    this.caps.classList.toggle('caps-is-on');
     this.keys.forEach((el) => el.toggleCaps());
-    document.querySelector('.CapsLock').classList.toggle('caps-is-on');
   }
 
   addShift() {

@@ -19,7 +19,7 @@ export default class Dom {
     this.content.append(description);
 
     const info = document.createElement('p');
-    info.textContent = 'Для переключения языка комбинация: левыe ctrl + alt';
+    info.textContent = 'Для переключения языка комбинация: ctrl + alt';
     info.classList.add('info');
     this.content.append(info);
     document.body.append(this.content);

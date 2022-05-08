@@ -67,7 +67,7 @@ window.addEventListener('keydown', (e) => {
   }
   if ((e.code === 'ShiftLeft' || e.code === 'ShiftRight') && !e.repeat) {
     keyboard.pressKey(item);
-  } else if (e.code === 'CapsLock' && !e.repeat) {
+  } else if (e.code === 'CapsLock') {
     keyboard.pressKey(item);
   } else {
     keyboard.pressKey(item);
