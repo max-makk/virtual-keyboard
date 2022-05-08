@@ -4,6 +4,7 @@ import Storage from './Storage';
 
 export default class Keyboard {
   constructor(language = 'eng') {
+    this.shiftIsPressed = false;
     this.language = language;
     this.keys = [];
     this.layoutsKeys = { alt: false, ctrl: false };
@@ -96,16 +97,24 @@ export default class Keyboard {
   }
 
   addShift() {
+    if (this.shiftIsPressed) {
+      return;
+    }
     this.keys.forEach((el) => el.toggleShift());
+    this.shiftIsPressed = true;
   }
 
   disableShift(k) {
+    if (!this.shiftIsPressed) {
+      return;
+    }
     if (k === 'ShiftLeft' || k === 'ShiftRight') {
       this.removeShift();
     }
   }
 
   removeShift() {
+    this.shiftIsPressed = false;
     this.keys.forEach((el) => el.toggleShift());
   }
 
