@@ -1,8 +1,8 @@
-#To get started:
+To get started:
 
 ## `npm install`
 
-# Available Scripts
+Available Scripts
 
 ## `npm run build` or `npm start`
 
