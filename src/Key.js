@@ -1,6 +1,7 @@
 export default class Key {
   constructor(lang, code, eng, rus) {
     this.capsIsOn = false;
+    this.shiftIsOn = false;
     this.language = lang;
     this.codeName = code;
     this.layout = {
@@ -30,6 +31,7 @@ export default class Key {
   }
 
   toggleShift() {
+    this.shiftIsOn = !this.shiftIsOn;
     if (this.capsIsOn) {
       if (this.current === this.layout[this.language].caps) {
         this.current = this.layout[this.language].shiftCaps;
@@ -49,9 +51,17 @@ export default class Key {
   toggleCaps() {
     this.capsIsOn = !this.capsIsOn;
     if (this.capsIsOn) {
-      this.current = this.layout[this.language].caps;
-    } else {
-      this.current = this.layout[this.language].Low;
+      if (this.shiftIsOn) {
+        this.current = this.layout[this.language].shiftCaps;
+      } else {
+        this.current = this.layout[this.language].caps;
+      }
+    } else if (!this.capsIsOn) {
+      if (this.shiftIsOn) {
+        this.current = this.layout[this.language].Up;
+      } else {
+        this.current = this.layout[this.language].Low;
+      }
     }
     this.btn.textContent = this.current;
   }
